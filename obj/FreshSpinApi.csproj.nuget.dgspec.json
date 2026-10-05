@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi.csproj": {}
+    "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi\\FreshSpinApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi.csproj": {
+    "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi\\FreshSpinApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi.csproj",
+        "projectUniqueName": "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi\\FreshSpinApi.csproj",
         "projectName": "FreshSpinApi",
-        "projectPath": "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi.csproj",
+        "projectPath": "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi\\FreshSpinApi.csproj",
         "packagesPath": "C:\\Users\\maria\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\maria\\FreshSpinApi\\obj\\",
+        "outputPath": "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

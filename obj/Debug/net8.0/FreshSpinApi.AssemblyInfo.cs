@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FreshSpinApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d83001fc913972a935d26f183fc94c7147a1b34")]
 [assembly: System.Reflection.AssemblyProductAttribute("FreshSpinApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FreshSpinApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

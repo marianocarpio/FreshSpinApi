@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bin/wVvZU+4=",
+  "dgSpecHash": "aplCHl0eok4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi.csproj",
+  "projectFilePath": "C:\\Users\\maria\\FreshSpinApi\\FreshSpinApi\\FreshSpinApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\maria\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.2\\microsoft.entityframeworkcore.8.0.2.nupkg.sha512",
     "C:\\Users\\maria\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.2\\microsoft.entityframeworkcore.abstractions.8.0.2.nupkg.sha512",
