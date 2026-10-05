@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshSpin Laundry Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 p-6">
+    <div class="max-w-5xl mx-auto space-y-6">
+        
+        <div class="flex justify-between items-center bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900">FreshSpin Dashboard</h1>
+                <p class="text-sm text-slate-500">Live API Management</p>
+            </div>
+            <span id="lastUpdated" class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-mono">Connecting...</span>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+            <h2 class="text-lg font-semibold mb-4 text-slate-900">Create New Booking</h2>
+            <form id="bookingForm" onsubmit="createBooking(event)" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <input type="text" id="customerId" placeholder="Customer ID (e.g. CUST-102)" required class="border rounded-lg px-3 py-2 text-sm">
+                <select id="serviceType" class="border rounded-lg px-3 py-2 text-sm">
+                    <option value="Wash & Fold">Wash & Fold</option>
+                    <option value="Dry Cleaning">Dry Cleaning</option>
+                    <option value="Steam Iron">Steam Iron</option>
+                </select>
+                <input type="number" step="0.1" id="weightKg" placeholder="Weight (kg)" required class="border rounded-lg px-3 py-2 text-sm">
+                <input type="number" step="0.01" id="totalCost" placeholder="Total Cost (₱)" required class="border rounded-lg px-3 py-2 text-sm">
+                <input type="text" id="pickupAddress" placeholder="Pickup Address" required class="col-span-1 md:col-span-3 border rounded-lg px-3 py-2 text-sm">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg text-sm transition">Submit Booking</button>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+                <h2 class="text-lg font-semibold text-slate-900">Active Bookings</h2>
+                <button onclick="fetchBookings()" class="text-xs text-blue-600 font-medium hover:underline">Refresh Data</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-50 text-slate-500 font-medium text-xs border-b">
+                        <tr>
+                            <th class="p-3.5">ID</th>
+                            <th class="p-3.5">Customer</th>
+                            <th class="p-3.5">Service</th>
+                            <th class="p-3.5">Weight</th>
+                            <th class="p-3.5">Cost</th>
+                            <th class="p-3.5">Status</th>
+                            <th class="p-3.5 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsTable" class="divide-y divide-slate-100">
+                        <tr><td colspan="7" class="p-4 text-center text-slate-400">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5096/api/Bookings';
+
+        async function fetchBookings() {
+            try {
+                const res = await fetch(API_URL);
+                const data = await res.json();
+                renderTable(data);
+            } catch (err) {
+                console.error('API Error:', err);
+            }
+        }
+
+        function renderTable(bookings) {
+            const tbody = document.getElementById('bookingsTable');
+            tbody.innerHTML = '';
+            bookings.forEach(b => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-3.5 font-medium">#${b.id}</td>
+                    <td class="p-3.5">${b.customerId}</td>
+                    <td class="p-3.5">${b.serviceType}</td>
+                    <td class="p-3.5">${b.weightKg} kg</td>
+                    <td class="p-3.5">₱${b.totalCost.toFixed(2)}</td>
+                    <td class="p-3.5"><span class="px-2 py-1 text-xs rounded-full bg-blue-50 text-blue-700 border border-blue-200">${getStatusName(b.status)}</span></td>
+                    <td class="p-3.5 text-right">
+                        <select onchange="updateStatus(${b.id}, this.value)" class="text-xs border rounded px-2 py-1">
+                            <option value="" disabled selected>Change Status...</option>
+                            <option value="0">Pending</option>
+                            <option value="1">Assigned</option>
+                            <option value="2">InWashing</option>
+                            <option value="3">ReadyForDelivery</option>
+                            <option value="4">Completed</option>
+                        </select>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            document.getElementById('lastUpdated').textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+        }
+
+        function getStatusName(status) {
+            const statuses = ['Pending', 'Assigned', 'InWashing', 'ReadyForDelivery', 'Completed', 'Cancelled'];
+            return statuses[status] || status;
+        }
+
+        async function createBooking(e) {
+            e.preventDefault();
+            const booking = {
+                customerId: document.getElementById('customerId').value,
+                serviceType: document.getElementById('serviceType').value,
+                weightKg: parseFloat(document.getElementById('weightKg').value),
+                totalCost: parseFloat(document.getElementById('totalCost').value),
+                pickupAddress: document.getElementById('pickupAddress').value
+            };
+
+            await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(booking)
+            });
+
+            document.getElementById('bookingForm').reset();
+            fetchBookings();
+        }
+
+        async function updateStatus(id, newStatus) {
+            await fetch(`${API_URL}/${id}/status`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(parseInt(newStatus))
+            });
+            fetchBookings();
+        }
+
+        fetchBookings();
+    </script>
+</body>
+</html>

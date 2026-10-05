@@ -1,0 +1,8 @@
+C:\Users\maria\FreshSpinApi\obj\Debug\net9.0\FreshSpinApi.csproj.AssemblyReference.cache
+C:\Users\maria\FreshSpinApi\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\maria\FreshSpinApi\obj\Debug\net9.0\FreshSpinApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maria\FreshSpinApi\obj\Debug\net9.0\FreshSpinApi.AssemblyInfoInputs.cache
+C:\Users\maria\FreshSpinApi\obj\Debug\net9.0\FreshSpinApi.AssemblyInfo.cs
+C:\Users\maria\FreshSpinApi\obj\Debug\net9.0\FreshSpinApi.csproj.CoreCompileInputs.cache
+C:\Users\maria\FreshSpinApi\obj\Debug\net9.0\FreshSpinApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\maria\FreshSpinApi\obj\Debug\net9.0\FreshSpinApi.MvcApplicationPartsAssemblyInfo.cache
